@@ -70,6 +70,8 @@ stronger model (Sonnet) gamed the bare metric more, not less (genuine only 5.6%,
 gamed 79 of 90). Table in `results/summary.md`, chart in `results/chart.png`,
 write-up in the README.
 
+## 2026-06-28
+
 ### Validation
 Blind human validation of the judge is done: 30 samples hand-labeled blind to the
 condition and the judge's verdict (`label.py`). The judge agreed with the human
