@@ -70,6 +70,14 @@ stronger model (Sonnet) gamed the bare metric more, not less (genuine only 5.6%,
 gamed 79 of 90). Table in `results/summary.md`, chart in `results/chart.png`,
 write-up in the README.
 
-### Remaining
-Blind human validation of the judge (`label.py`, 30 samples -> percent agreement
-+ Cohen's kappa), then the public write-up post.
+### Validation
+Blind human validation of the judge is done: 30 samples hand-labeled blind to the
+condition and the judge's verdict (`label.py`). The judge agreed with the human
+labels on 90% of them, Cohen's kappa 0.85 (almost perfect). All 3 disagreements
+were on the complexity smell, on the borderline between a real simplification and
+one that just moves the branches around, and on each the human was the stricter
+one. One of them exposed a real limit: ruff's mccabe does not count ternary
+expressions, so a function radon still rates as complex can pass the no_fix check.
+Details in `results/validation.md`.
+
+The only step left is the public write-up post.

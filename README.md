@@ -12,12 +12,12 @@ gamed equally. This is me measuring it.
 
 When an AI is told to fix a code smell, you can phrase the instruction two ways:
 
-- **bare metric** — the raw linter message, e.g. `function is too complex (11 > 5)`.
-- **behavioral prompt** — guidance about intent, e.g. *"Write in one sentence
+- **bare metric**: the raw linter message, e.g. `function is too complex (11 > 5)`.
+- **behavioral prompt**: guidance about intent, e.g. *"Write in one sentence
   what this function does. If you cannot, it has more than one responsibility."*
 
 Does the behavioral prompt produce a **genuine** fix more often than the bare
-metric, or do both just produce a **gamed** fix — one that satisfies the check
+metric, or do both just produce a **gamed** fix, one that satisfies the check
 without improving the code?
 
 ## How it works
@@ -70,7 +70,7 @@ Two things stood out:
   code.** The no-guidance control stays low on both models.
 
 These are the deterministic judge's numbers. How far to trust the judge is
-checked separately by blind human labeling — see the next section.
+checked separately by blind human labeling. See the next section.
 
 ## How to game past my judge (the honest part)
 
@@ -104,13 +104,13 @@ are in `results/validation.md`.
 
 ## What's in this repo
 
-- `PREREGISTRATION.md` — the plan, locked before any model ran.
-- `cases/` — the 18 test functions, each with one known smell (`manifest.json` lists them).
-- `judge.py` — the deterministic scorer (genuine / gamed / no_fix); `tests/test_judge.py` proves it on known examples.
-- `harness.py` → `score.py` → `analyze.py` → `chart.py` — the pipeline: collect the model's fixes, run the judge, aggregate, plot.
-- `label.py` — the blind human check on the judge.
-- `results/` — every raw trial (`raw.jsonl`), the scored data, the summary table, the chart, and the human-validation report.
-- `LOG.md` — the build notebook: every step and decision, in order.
+- `PREREGISTRATION.md`: the plan, locked before any model ran.
+- `cases/`: the 18 test functions, each with one known smell (`manifest.json` lists them).
+- `judge.py`: the deterministic scorer (genuine / gamed / no_fix); `tests/test_judge.py` proves it on known examples.
+- `harness.py` → `score.py` → `analyze.py` → `chart.py`, the pipeline: collect the model's fixes, run the judge, aggregate, plot.
+- `label.py`: the blind human check on the judge.
+- `results/`: every raw trial (`raw.jsonl`), the scored data, the summary table, the chart, and the human-validation report.
+- `LOG.md`: the build notebook, every step and decision in order.
 
 ## Reproduce it
 
@@ -156,7 +156,8 @@ pre-registered protocol, and the picture gets fuller.
 The approach being tested is **Ivett Ördög's**, from her tool
 [Habit Hooks](https://github.com/devill/habit-hooks): a deterministic detector
 that hands the model a behavioral prompt at the smell instead of a bare metric.
-The challenge that prompted measuring it came from **Georgios Diamantopoulos**.
+The challenge that prompted measuring it came from
+[**Georgios Diamantopoulos**](https://www.linkedin.com/in/georgiosd).
 
 (The exact behavioral prompt tested here is the one from my own examiner hook in
 [Builder's Protocol](https://github.com/LiinaSuoniemi/builders-protocol).)
