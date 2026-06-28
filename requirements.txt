@@ -1,0 +1,5 @@
+anthropic==0.86.0
+radon==6.0.1
+python-dotenv==1.0.1
+ruff==0.15.18
+matplotlib==3.11.0

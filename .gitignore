@@ -1,0 +1,20 @@
+# Secrets — never commit
+.env
+*.key
+*.pem
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ruff_cache/
+.pytest_cache/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# scratch
+run.log
+run.err

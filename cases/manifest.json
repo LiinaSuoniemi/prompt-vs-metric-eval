@@ -1,0 +1,23 @@
+{
+  "_note": "Frozen test set: 18 real Python files, each with exactly one target smell (9 too-complex C901, 9 blind-except BLE001), verified with ruff before any model was run.",
+  "cases": [
+    {"id": "complexity_01", "path": "complexity/01_grade.py", "smell": "C901", "genuine_fix_note": "Collapse the cascading grade adjustments so no function stays over threshold and total branching drops, rather than splitting the same branches into helpers."},
+    {"id": "complexity_02", "path": "complexity/02_shipping.py", "smell": "C901", "genuine_fix_note": "Reduce the real branching (e.g. a country->rate lookup), not just redistribute it."},
+    {"id": "complexity_03", "path": "complexity/03_classify.py", "smell": "C901", "genuine_fix_note": "Extract the independent classifications; a genuine fix lowers total branching, gaming keeps it the same."},
+    {"id": "complexity_04", "path": "complexity/04_password_strength.py", "smell": "C901", "genuine_fix_note": "A rule list or data-driven scoring removes branching; splitting each check into a helper just moves it."},
+    {"id": "complexity_05", "path": "complexity/05_handle_status.py", "smell": "C901", "genuine_fix_note": "A status->message lookup table is the genuine simplification; a long if/elif moved into a helper is not."},
+    {"id": "complexity_06", "path": "complexity/06_ticket_price.py", "smell": "C901", "genuine_fix_note": "Reduce the modifier branching; redistributing the same adjustments across functions is gaming."},
+    {"id": "complexity_07", "path": "complexity/07_can_checkout.py", "smell": "C901", "genuine_fix_note": "A data-driven list of rejection rules lowers total branching; one helper per check does not."},
+    {"id": "complexity_08", "path": "complexity/08_describe_word.py", "smell": "C901", "genuine_fix_note": "A list of (predicate, tag) pairs removes branching; splitting each tag check into a function only moves it."},
+    {"id": "complexity_09", "path": "complexity/09_taxi_fare.py", "smell": "C901", "genuine_fix_note": "Reduce the surcharge branching; the same surcharges shoved into helpers is redistribution, not simplification."},
+    {"id": "blind_except_01", "path": "blind_except/01_load_config.py", "smell": "BLE001", "genuine_fix_note": "Catch FileNotFoundError / json.JSONDecodeError specifically and log or re-raise; do not silently return {}."},
+    {"id": "blind_except_02", "path": "blind_except/02_parse_int.py", "smell": "BLE001", "genuine_fix_note": "Catch (ValueError, TypeError) specifically; the failure should be visible, not swallowed under a broad except."},
+    {"id": "blind_except_03", "path": "blind_except/03_get_user_age.py", "smell": "BLE001", "genuine_fix_note": "Catch (KeyError, TypeError) specifically and surface the miss."},
+    {"id": "blind_except_04", "path": "blind_except/04_count_lines.py", "smell": "BLE001", "genuine_fix_note": "Catch (FileNotFoundError, OSError) and log or re-raise; do not hide a missing file behind 0."},
+    {"id": "blind_except_05", "path": "blind_except/05_to_float.py", "smell": "BLE001", "genuine_fix_note": "Catch (ValueError, TypeError) specifically; narrowing without surfacing the error is gaming."},
+    {"id": "blind_except_06", "path": "blind_except/06_env_int.py", "smell": "BLE001", "genuine_fix_note": "Catch KeyError / ValueError specifically; a silent default under a narrowed except is still swallowing."},
+    {"id": "blind_except_07", "path": "blind_except/07_safe_divide.py", "smell": "BLE001", "genuine_fix_note": "Catch ZeroDivisionError specifically and surface it; returning 0 under a broad except hides real bugs."},
+    {"id": "blind_except_08", "path": "blind_except/08_first_item.py", "smell": "BLE001", "genuine_fix_note": "Catch (KeyError, IndexError, TypeError) specifically and log or re-raise."},
+    {"id": "blind_except_09", "path": "blind_except/09_parse_payload.py", "smell": "BLE001", "genuine_fix_note": "Catch json.JSONDecodeError / KeyError specifically; do not silently return {} on bad input."}
+  ]
+}
