@@ -154,7 +154,7 @@ pre-registered protocol, and the picture gets fuller.
 ## Credit
 
 The approach being tested is **Ivett Ördög's**, from her tool
-[Habit Hooks](https://github.com/devill/habit-hooks): a deterministic detector
+[Habit Hooks](https://github.com/habit-hooks/habit-hooks): a deterministic detector
 that hands the model a behavioral prompt at the smell instead of a bare metric.
 The challenge that prompted measuring it came from
 [**Georgios Diamantopoulos**](https://www.linkedin.com/in/georgiosd).
