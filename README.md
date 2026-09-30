@@ -22,7 +22,7 @@ without improving the code?
 
 ## How it works
 
-- **Test set:** 18 real Python functions, each with exactly one known smell
+- **Test set:** 18 hand-written Python functions, each with exactly one known smell
   (9 too-complex, 9 blind-except), verified with ruff before any model ran
   (`cases/`).
 - **Three conditions**, same function and model, only the guidance differs:
@@ -69,6 +69,29 @@ Two things stood out:
 - **It is the behavioral phrasing specifically, not just asking for "better"
   code.** The no-guidance control stays low on both models.
 
+### By smell
+
+The plan named this breakdown as a secondary analysis. Genuine-fix rate, 45
+trials per cell, 95% CI:
+
+| model | smell | bare metric | behavioral prompt | control |
+|---|---|---|---|---|
+| Haiku 4.5 | blind-except | 0% [0, 0] | 98% [93, 100] | 9% [2, 18] |
+| Haiku 4.5 | too complex | 58% [42, 71] | 69% [56, 82] | 42% [27, 58] |
+| Sonnet 4.6 | blind-except | 0% [0, 0] | 89% [80, 98] | 42% [29, 58] |
+| Sonnet 4.6 | too complex | 11% [2, 22] | 78% [64, 89] | 27% [16, 40] |
+
+Most of the headline gap comes from blind-except, and that half has a confound.
+The blind-except prompt asks for the failure to be logged or surfaced, which is
+what the judge checks. So part of that gap may be the prompt telling the model
+the scoring rule, not better guidance in general.
+
+The complexity prompt does not name the judge's rule. It asks for one sentence
+that says what the function does. There Sonnet went from 11% to 78%. On Haiku
+the gap is small, 58% to 69%, and the intervals overlap, so Haiku shows no clear
+effect on complexity. A run that removes the confound (bare metric plus one line
+saying not to swallow the error) has not been done yet.
+
 These are the deterministic judge's numbers. How far to trust the judge is
 checked separately by blind human labeling. See the next section.
 
@@ -111,6 +134,7 @@ are in `results/validation.md`.
 - `label.py`: the blind human check on the judge.
 - `results/`: every raw trial (`raw.jsonl`), the scored data, the summary table, the chart, and the human-validation report.
 - `LOG.md`: the build notebook, every step and decision in order.
+- `LICENSE`: MIT.
 
 ## Reproduce it
 
@@ -160,4 +184,12 @@ The challenge that prompted measuring it came from
 [**Georgios Diamantopoulos**](https://www.linkedin.com/in/georgiosd).
 
 (The exact behavioral prompt tested here is the one from my own examiner hook in
-[Builder's Protocol](https://github.com/LiinaSuoniemi/builders-protocol).)
+[Builder's Protocol](https://github.com/LiinaSuoniemi/builders-protocol/blob/main/examiner-hook/examiner_hook.py).
+`harness.py` holds a verbatim copy.)
+
+## Changes after the plan
+
+- `PREREGISTRATION.md` mentions `run.sh`. It was never built. The commands under
+  *Reproduce it* do the same job.
+- `examiner_hook.py`, named in the plan, lives in Builder's Protocol, linked above.
+- The by-smell breakdown was pre-specified but only published on 30 September 2026.
